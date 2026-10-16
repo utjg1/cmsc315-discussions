@@ -48,19 +48,27 @@ class Entity:
 #
 # Replace the pass statement with your implementation.
 
-class Crow(Entity):
+class Monster(Entity):
 
     color = "Brown"
 
     def __init__(self, name: str, location: str, height: float, weight: float):
         super().__init__(name, location)
-        self.height = height
-        self.weight = weight
+
+        if (height >= 0):
+            self.height = height
+        else:
+            self.height = 0
+
+        if (height >= 0):
+            self.weight = weight
+        else:
+            self.weight = 0
 
     def announce_self(self):
         super().announce_self()
         print(f"I am {self.height}cm and {self.weight}kg.")
-        print(f"I am also a Crow!")
+        print(f"I am also a Monster!")
 
     def change_location(self, location: str):
         old_location = self.location
@@ -82,44 +90,44 @@ class Crow(Entity):
 def demonstrate_namespaces():
 
     print(f"__CREATING TWO INSTANCES OF THE SAME OBJECT TYPE__")
-    crow_a = Crow("Henry", "Ugly Dungeon", 30.4, 12.8)
-    crow_a.announce_self()
+    monster_a = Monster("Henry", "Ugly Dungeon", 30.4, 12.8)
+    monster_a.announce_self()
 
-    crow_b = Crow("Crunchy", "Pretty Palace", 23.2, 10.2)
-    crow_b.announce_self()
+    monster_b = Monster("Crunchy", "Pretty Palace", 23.2, 10.2)
+    monster_b.announce_self()
 
     print("\n=== Namespace Demonstration ===")
 
     print(f"-Accessing class variable through class itself-")
-    print(f"{crow_a.name} is {Crow.color}")
-    print(f"{crow_b.name} is also {Crow.color}")
+    print(f"{monster_a.name} is {Monster.color}")
+    print(f"{monster_b.name} is also {Monster.color}")
 
     print(f"-Modifying class variable through class itself-")
-    print(f"Changing Crow.color from Brown to Pink")
-    Crow.color = "Pink"
-    print(f"{crow_a.name} is {Crow.color}")
-    print(f"{crow_b.name} is also {Crow.color}")
+    print(f"Changing Monster.color from Brown to Pink")
+    Monster.color = "Pink"
+    print(f"{monster_a.name} is {Monster.color}")
+    print(f"{monster_b.name} is also {Monster.color}")
 
     print(f"-Accessing class variable through object instance-")
-    print(f"{crow_a.name} is {crow_a.color}")
-    print(f"{crow_b.name} is also {crow_b.color}")
+    print(f"{monster_a.name} is {monster_a.color}")
+    print(f"{monster_b.name} is also {monster_b.color}")
 
     print(f"-Modifying class variable through class itself-")
-    print(f"Changing crow_b.color (crow_b is {crow_b.name}) from Pink to Yellow")
-    crow_b.color = "Yellow"
-    print(f"{crow_a.name} is {crow_a.color}")
-    print(f"{crow_b.name} is {crow_b.color}")
+    print(f"Changing monster_b.color (monster_b is {monster_b.name}) from Pink to Yellow")
+    monster_b.color = "Yellow"
+    print(f"{monster_a.name} is {monster_a.color}")
+    print(f"{monster_b.name} is {monster_b.color}")
 
     print(f"-Adding new attribute 'royalty' to an instance-")
-    crow_b.royalty = "King"
-    print(f"Did I mention {crow_b.name} is a {crow_b.royalty}!?")
+    monster_b.royalty = "King"
+    print(f"Did I mention {monster_b.name} is a {monster_b.royalty}!?")
 
     print(f"-Displaying object namespaces-")
-    print(f"{crow_a.name}'s namespace: {crow_a.__dict__}")
-    print(f"{crow_b.name}'s namespace: {crow_b.__dict__}")
+    print(f"{monster_a.name}'s namespace: {monster_a.__dict__}")
+    print(f"{monster_b.name}'s namespace: {monster_b.__dict__}")
 
     print(f"-Displaying class namespace-")
-    print(f"The Crow namespace: {Crow.__dict__}")
+    print(f"The Monster namespace: {Monster.__dict__}")
 
 
 # TODO 4:
@@ -191,16 +199,16 @@ def demonstrate_copying():
 def main():
     print("=== Unit 1 OOP Assignment ===")
 
-    print(f"-Entity Demonstration-")
+    print(f"-Entity (The 'Parent Class' Demonstration-")
     e = Entity("Georgie", "Home")
     print(f"Entitie's 'announce_self' method")
     e.announce_self()
 
-    print(f"-Crow Demonstration-")
-    c = Crow("Snoozie", "Salad Land", 345.2, 78.9)
-    print(f"Crow's 'announce_self' method")
+    print(f"-Monster (The 'Child Class' Demonstration-")
+    c = Monster("Snoozie", "Salad Land", 345.2, 78.9)
+    print(f"Monster's 'announce_self' method")
     c.announce_self()
-    print(f"Crow's extra method 'change_location' method")
+    print(f"Monster's extra method 'change_location' method")
     c.change_location("Smelly Woods")
     c.announce_self()
 

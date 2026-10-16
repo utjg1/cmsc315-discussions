@@ -12,7 +12,6 @@ analyze the code to demonstrate understanding of inheritance, namespaces, and ob
 
 from copy import copy, deepcopy
 
-
 # TODO 1:
 # Create a parent class.
 #
@@ -24,8 +23,17 @@ from copy import copy, deepcopy
 #
 # Replace the pass statement with your implementation.
 
-class ParentClass:
-    pass
+class Entity:
+
+    active = True
+
+    def __init__(self, name: str, location: str):
+        self.name = name
+        self.location = location
+
+    def announce_self(self):
+        print(f"Hello, I am {self.name}!")
+        print(f"I am at {self.location}.")
 
 
 # TODO 2:
@@ -40,8 +48,24 @@ class ParentClass:
 #
 # Replace the pass statement with your implementation.
 
-class ChildClass(ParentClass):
-    pass
+class Crow(Entity):
+
+    color = "Brown"
+
+    def __init__(self, name: str, location: str, height: float, weight: float):
+        super().__init__(name, location)
+        self.height = height
+        self.weight = weight
+
+    def announce_self(self):
+        super().announce_self()
+        print(f"I am {self.height}cm and {self.weight}kg.")
+        print(f"I am also a Crow!")
+
+    def change_location(self, location: str):
+        old_location = self.location
+        self.location = location
+        print(f"Location of {self.name} changed from {old_location} to {self.location}!")
 
 
 # TODO 3:
@@ -56,8 +80,46 @@ class ChildClass(ParentClass):
 # - Display information about the class namespace.
 
 def demonstrate_namespaces():
+
+    print(f"__CREATING TWO INSTANCES OF THE SAME OBJECT TYPE__")
+    crow_a = Crow("Henry", "Ugly Dungeon", 30.4, 12.8)
+    crow_a.announce_self()
+
+    crow_b = Crow("Crunchy", "Pretty Palace", 23.2, 10.2)
+    crow_b.announce_self()
+
     print("\n=== Namespace Demonstration ===")
-    print("TODO: Implement namespace demonstration")
+
+    print(f"-Accessing class variable through class itself-")
+    print(f"{crow_a.name} is {Crow.color}")
+    print(f"{crow_b.name} is also {Crow.color}")
+
+    print(f"-Modifying class variable through class itself-")
+    print(f"Changing Crow.color from Brown to Pink")
+    Crow.color = "Pink"
+    print(f"{crow_a.name} is {Crow.color}")
+    print(f"{crow_b.name} is also {Crow.color}")
+
+    print(f"-Accessing class variable through object instance-")
+    print(f"{crow_a.name} is {crow_a.color}")
+    print(f"{crow_b.name} is also {crow_b.color}")
+
+    print(f"-Modifying class variable through class itself-")
+    print(f"Changing crow_b.color (crow_b is {crow_b.name}) from Pink to Yellow")
+    crow_b.color = "Yellow"
+    print(f"{crow_a.name} is {crow_a.color}")
+    print(f"{crow_b.name} is {crow_b.color}")
+
+    print(f"-Adding new attribute 'royalty' to an instance-")
+    crow_b.royalty = "King"
+    print(f"Did I mention {crow_b.name} is a {crow_b.royalty}!?")
+
+    print(f"-Displaying object namespaces-")
+    print(f"{crow_a.name}'s namespace: {crow_a.__dict__}")
+    print(f"{crow_b.name}'s namespace: {crow_b.__dict__}")
+
+    print(f"-Displaying class namespace-")
+    print(f"The Crow namespace: {Crow.__dict__}")
 
 
 # TODO 4:
@@ -72,8 +134,48 @@ def demonstrate_namespaces():
 # - Use comments to explain the difference between shallow and deep copying.
 
 def demonstrate_copying():
+
+    # Original to be copied
+    original = [[1,2],[3,4],[5,6]]
+
+    # Shallow copy of original
+    # Is a copy of the references at a high level in the original at the time of copying
+    shallow_copy = original.copy()
+
+    # Deep copy of original
+    # Is a separate copy of the references at a deeper level at the time of copying
+    deep_copy = deepcopy(original)
+
     print("\n=== Copy Demonstration ===")
-    print("TODO: Implement shallow copy and deep copy demonstration")
+
+    print(f"Before any changes:")
+    print(f"Original: {original}")
+    print(f"Shallow Copy:{shallow_copy}")
+    print(f"Deep Copy:{deep_copy}")
+
+    original[0] = [7,8]
+
+    # Since this is changing a shallow object being referenced in original, only
+    # original should change
+    print(f"After changing high level array 'original[0] = [7,8]'")
+    print(f"Original: {original}")
+    print(f"Shallow Copy:{shallow_copy}")
+    print(f"Deep Copy:{deep_copy}")
+
+    original[1][0] = 9
+
+    # Since this is changing a deep object being referenced in original, both
+    # original and shallow should change
+    # Shallow and original are both referencing the same object containing [3,4],
+    # and when one of those values get changed to 9, both collections will reflect
+    # that change
+    # Deep has unique references to separate objects on both the shallow and low level,
+    # so the references it is using are unchanged
+    print(f"After changing value in low level array 'original[1][0] = 9'")
+    print(f"Original: {original}")
+    print(f"Shallow Copy:{shallow_copy}")
+    print(f"Deep Copy:{deep_copy}")
+
 
 
 # TODO 5:
@@ -89,9 +191,20 @@ def demonstrate_copying():
 def main():
     print("=== Unit 1 OOP Assignment ===")
 
-    print("\nTODO: Create and test your parent object")
+    print(f"-Entity Demonstration-")
+    e = Entity("Georgie", "Home")
+    print(f"Entitie's 'announce_self' method")
+    e.announce_self()
 
-    print("\nTODO: Create and test your child object")
+    print(f"-Crow Demonstration-")
+    c = Crow("Snoozie", "Salad Land", 345.2, 78.9)
+    print(f"Crow's 'announce_self' method")
+    c.announce_self()
+    print(f"Crow's extra method 'change_location' method")
+    c.change_location("Smelly Woods")
+    c.announce_self()
+
+    print(f"")
 
     demonstrate_namespaces()
     demonstrate_copying()

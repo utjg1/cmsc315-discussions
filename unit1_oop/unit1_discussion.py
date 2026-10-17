@@ -55,12 +55,14 @@ class Monster(Entity):
     def __init__(self, name: str, location: str, height: float, weight: float):
         super().__init__(name, location)
 
+        # Making sure height is set to 0 or greater
         if (height >= 0):
             self.height = height
         else:
             self.height = 0
 
-        if (height >= 0):
+        # Making sure height is set to 0 or greater
+        if (weight >= 0):
             self.weight = weight
         else:
             self.weight = 0

@@ -201,12 +201,12 @@ def demonstrate_copying():
 def main():
     print("=== Unit 1 OOP Assignment ===")
 
-    print(f"-Entity (The 'Parent Class' Demonstration-")
+    print(f"-Entity (The 'Parent Class') Demonstration-")
     e = Entity("Georgie", "Home")
     print(f"Entitie's 'announce_self' method")
     e.announce_self()
 
-    print(f"-Monster (The 'Child Class' Demonstration-")
+    print(f"-Monster (The 'Child Class') Demonstration-")
     c = Monster("Snoozie", "Salad Land", 345.2, 78.9)
     print(f"Monster's 'announce_self' method")
     c.announce_self()

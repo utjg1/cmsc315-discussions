@@ -328,5 +328,58 @@ def main():
 
     print(f"-ENDING STACK BECOMES EMPTY AFTER REMOVAL BEHAVIOR-")
 
+
+    # ==========================================
+    # REAL WORLD STACK SCENARIO: PLAYING CARDS
+    # ==========================================
+
+    print("\n=== PLAYING CARDS STACK DEMO ===")
+
+    print(f"--Creating the Playing Cards Deck--")
+    deck = Stack()
+    print(f"Current Deck Contents: {deck.list}")
+
+    print(f"--Adding Cards on Top of Deck--")
+    cards_to_push = ["2 Hearts", "5 Spades", "K Hearts", "9 Clubs", "10 Hearts"]
+    for i in cards_to_push:
+        print(f"Putting {i} on Top of Deck")
+        deck.push(i)
+    print(f"Current Deck Contents: {deck.list}")
+
+    print(f"--Drawing Card from Deck--")
+    print(f"{deck.pop()} Drawn from Deck")
+    print(f"Current Deck Contents: {deck.list}")
+
+    print(f"--Peeking at Next Card from Deck--")
+    print(f"{deck.peek()} Peeked from Deck")
+    print(f"Current Deck Contents: {deck.list}")
+
+    
+
+    # ================================================
+    # REAL WORLD QUEUE SCENARIO: DOCTOR'S WAITING ROOM
+    # ================================================
+
+    print("\n=== DOCTOR'S WAITING ROOM QUEUE DEMO ===")
+
+    print(f"--Creating the Doctor's Waiting Room--")
+    room = Queue()
+    print(f"Current Patients in Room: {room.queue}")
+
+    print(f"--Adding Patients to Doctor's Waiting Room--")
+    patients = ["Jenifer", "Bradley", "Gregory", "Alex", "Cassandra"]
+    for i in patients:
+        print(f"{i} is now Waiting in Doctor's Waiting Room")
+        room.enqueue(i)
+    print(f"Current Patients in Room: {room.queue}")
+
+    print(f"--Check Next Patient to Assess in Doctor's Waiting Room--")
+    print(f"Next Patient to Assess: {room.front()}")
+    print(f"Current Patients in Room: {room.queue}")
+
+    print(f"--Call Next Patient Back from Doctor's Waiting Room--")
+    print(f"Call Next Patient Back: {room.dequeue()}")
+    print(f"Current Patients in Room: {room.queue}")
+
 if __name__ == "__main__":
     main()

@@ -17,15 +17,25 @@ from logging import exception
 
 class Stack:
     def __init__(self):
+        # TODO (Student): Create the internal data structure for the stack.
+        # Hint: A Python list can be used to store stack values.
+
         # This list is the only thing I need to initialize at the beginning of a stack as it will
         # keep track of the order of my data and can be dynamically resized
         self.list = []
 
     def push(self, value):
+        # TODO (Student): Add value to the stack.
+        # Add a short comment explaining why this operation supports LIFO behavior.
+
         # Adds a value to the end of my stack's list, which is where I pop from
         self.list.append(value)
 
     def pop(self):
+        # TODO (Student): Remove and return the most recently added value.
+        # Improve or explain empty-stack handling.
+        # What should happen if the stack is empty?
+
         # Throws an exception if the list is empty to catch undefined returns
         if not self.list:
             raise IndexError("Stack Pop while Empty!")
@@ -35,6 +45,9 @@ class Stack:
         return self.list.pop(len(self.list) - 1)
 
     def peek(self):
+        # TODO (Student): Return the top value without removing it.
+        # Add a comment explaining what peek does.
+
         # Throws an exception if the list is empty to catch undefined returns
         if not self.list:
             raise IndexError("Stack Peek while Empty!")
@@ -44,21 +57,32 @@ class Stack:
         return self.list[len(self.list) - 1]
 
     def is_empty(self):
+        # TODO (Student): Return True if the stack has no values.
+
         # Returns whether the internal list is empty
         return not self.list
 
 
 class Queue:
     def __init__(self):
+        # TODO (Student): Create the internal data structure for the queue.
+        # Hint: collections.deque is useful for efficient queue operations.
+
         # The deque object has the implementation I will need for creating a Queue
         self.queue = deque()
 
     def enqueue(self, value):
+        # TODO (Student): Add value to the back of the queue.
+        # Add a short comment explaining why this operation supports FIFO behavior.
+
         # Adds an object to the beginning of the queue, the furthest position away
         # from being popped
         self.queue.appendleft(value)
 
     def dequeue(self):
+        # TODO (Student): Remove and return the value from the front of the queue.
+        # Explain or improve empty-queue handling.
+
         # Throws an exception if the deque is empty to catch undefined returns
         if not self.queue:
             raise IndexError("Queue Dequeue while Empty!")
@@ -68,6 +92,9 @@ class Queue:
         return self.queue.pop()
 
     def front(self):
+        # TODO (Student): Return the front value without removing it.
+        # Add a comment explaining what front returns.
+
         # Throws an exception if the list is empty to catch undefined returns
         if not self.queue:
             raise IndexError("Queue Front while Empty!")
@@ -76,6 +103,8 @@ class Queue:
         return self.queue[len(self.queue) - 1]
 
     def is_empty(self):
+        # TODO (Student): Return True if the queue has no values.
+
         # Returns whether the deque is empty
         return not self.queue
 
@@ -354,7 +383,7 @@ def main():
     print(f"{deck.peek()} Peeked from Deck")
     print(f"Current Deck Contents: {deck.list}")
 
-    
+
 
     # ================================================
     # REAL WORLD QUEUE SCENARIO: DOCTOR'S WAITING ROOM

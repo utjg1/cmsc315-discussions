@@ -322,5 +322,36 @@ def main():
     value it can reasonably be inserted to, which in this case is 0 since it is an empty list
     """
 
+
+
+    # ==========================================
+    # REAL WORLD SCENARIO: HIGHWAY SIMULATION
+    # ==========================================
+
+    print("\n=== REAL WORLD SCENARIO: HIGHWAY SIMULATION ===")
+
+    print(f"--Creating Initial Highway Simulation Scenario--")
+    list_highway = ["Blue Car", "Red Truck", "Yellow Van"]
+    print(f"Current Highway Simulation: {list_highway}")
+
+    print(f"\n-DEMONSTRATING PINK MOTORCYCLE MERGING INTO RED TRUCK'S POSITION-")
+
+    print(f"--Finding Index of Red Truck--")
+    index_rt = search_value(list_highway, "Red Truck")
+    print(f"Red Truck found at Position: {index_rt}")
+    print(f"--Merging Pink Motorcycle at Position of Red Truck--")
+    insert_at(list_highway, index_rt, "Pink Motorcycle")
+    print(f"Current Highway Simulation: {list_highway}")
+
+    print(f"\n-DEMONSTRATING YELLOW VAN TAKING AN EXIT-")
+
+    print(f"--Finding Position of Yellow Van--")
+    index_yv = search_value(list_highway, "Yellow Van")
+    print(f"Yellow Van found at Position: {index_yv}")
+    print(f"--Having Yellow Van Take an Exit--")
+    delete_at(list_highway, index_yv)
+    print(f"Current Highway Simulation: {list_highway}")
+
+
 if __name__ == "__main__":
     main()

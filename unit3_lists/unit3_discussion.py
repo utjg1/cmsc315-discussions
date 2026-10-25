@@ -349,7 +349,7 @@ def main():
     index_yv = search_value(list_highway, "Yellow Van")
     print(f"Yellow Van found at Position: {index_yv}")
     print(f"--Having Yellow Van Take an Exit--")
-    delete_at(list_highway, index_yv)
+    print(f"{delete_at(list_highway, index_yv)} Exiting")
     print(f"Current Highway Simulation: {list_highway}")
 
 

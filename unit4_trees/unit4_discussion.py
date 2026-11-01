@@ -17,14 +17,19 @@ class Node:
         # TODO (Student):
         # Store the node's value and initialize references
         # to the left and right child nodes.
-        pass
+
+        self.value = value
+
+        self.left_node = None
+        self.right_node = None
 
 
 class BST:
     def __init__(self):
         # TODO (Student):
         # Initialize an empty Binary Search Tree.
-        pass
+
+        self.root_node = None
 
     def insert(self, value):
         """
@@ -37,7 +42,12 @@ class BST:
           whether a value is smaller or larger than the
           current node.
         """
-        pass
+
+        if self.root_node is None:
+            self.root_node = Node(value)
+        else:
+            self._insert_recursive(self.root_node, value)
+
 
     def _insert_recursive(self, node, value):
         """
@@ -50,7 +60,20 @@ class BST:
         - Insert larger values into the right subtree.
         - Return the updated node reference.
         """
-        pass
+
+        if value == node.value:
+            return
+
+        if value < node.value:
+            if node.left_node is None:
+                node.left_node = Node(value)
+            else:
+                self._insert_recursive(node.left_node, value)
+        else:
+            if node.right_node is None:
+                node.right_node = Node(value)
+            else:
+                self._insert_recursive(node.right_node, value)
 
     def search(self, value):
         """
@@ -63,14 +86,31 @@ class BST:
         - Add comments explaining why BST search is often
           more efficient than linear search.
         """
-        pass
+
+        if self.root_node is None:
+            return False
+        else:
+            return self._search_recursive(self.root_node, value)
 
     def _search_recursive(self, node, value):
         """
         TODO (Student):
         Implement recursive BST search.
         """
-        pass
+
+        if value == node.value:
+            return True
+
+        if value < node.value:
+            if node.left_node is None:
+                return False
+            else:
+                return self._search_recursive(node.left_node, value)
+        else:
+            if node.right_node is None:
+                return False
+            else:
+                return self._search_recursive(node.right_node, value)
 
     def inorder(self):
         """
@@ -78,7 +118,13 @@ class BST:
         Return a list containing the values from an
         in-order traversal.
         """
-        pass
+
+        values = []
+
+        if self.root_node is not None:
+            self._inorder_recursive(self.root_node, values)
+
+        return values
 
     def _inorder_recursive(self, node, values):
         """
@@ -92,7 +138,14 @@ class BST:
         - Add comments explaining why this traversal
           produces sorted output in a BST.
         """
-        pass
+
+        if node.left_node is not None:
+            self._inorder_recursive(node.left_node, values)
+
+        values.append(node.value)
+
+        if node.right_node is not None:
+            self._inorder_recursive(node.right_node, values)
 
 
 def main():
@@ -113,6 +166,16 @@ def main():
     print("\n=== TREE CONSTRUCTION ===")
     print("TODO: Create a BST and insert multiple values.")
 
+    print(f"--Creating the Tree--")
+    bst = BST()
+    print(f"New BST Created with Content: {bst.inorder()}")
+
+    print(f"--Populating the Tree--")
+    data_list = [ 12, 10, 90, 1, 8, 17, 9]
+    print(f"Adding the Following Content to the BST: {data_list}")
+    for data in data_list:
+        bst.insert(data)
+
     # ===============================
     # TODO (Student): IN-ORDER TRAVERSAL
     # ===============================
@@ -126,6 +189,9 @@ def main():
     print("\n=== IN-ORDER TRAVERSAL ===")
     print("TODO: Display and explain traversal results.")
 
+    print(f"--Displaying the Tree--")
+    print(f"The BST After Populated Prints as: {bst.inorder()}")
+
     # ===============================
     # TODO (Student): SEARCH TESTS
     # ===============================
@@ -137,6 +203,18 @@ def main():
 
     print("\n=== SEARCH TESTS ===")
     print("TODO: Demonstrate BST searching.")
+
+    print(f"--Demonstrating Existing Value Search--")
+    exist1 = 10
+    print(f"Searching for {exist1} in the BST Returns: {bst.search(exist1)}")
+    exist2 = 90
+    print(f"Searching for {exist2} in the BST Returns: {bst.search(exist2)}")
+
+    print(f"--Demonstrating Non-Existing Value Search--")
+    exist3 = 2
+    print(f"Searching for {exist3} in the BST Returns: {bst.search(exist3)}")
+    exist4 = 1000
+    print(f"Searching for {exist4} in the BST Returns: {bst.search(exist4)}")
 
     # ===============================
     # TODO (Student): EDGE CASES
@@ -155,7 +233,47 @@ def main():
     print("\n=== EDGE CASES ===")
     print("TODO: Demonstrate and explain an edge case.")
 
+    print(f"--Creating Edge Case Tree--")
+    bst_edge = BST()
+    print(f"New BST Created with Content: {bst_edge.inorder()}")
 
+    print(f"--Searching Empty Tree--")
+    exist5 = 25
+    print(f"Searching for {exist5} in the BST Returns: {bst_edge.search(exist5)}")
+
+    print(f"--Populating Tree With Duplicates--")
+    data_list_edge = [ 1, 1, 2, 3, 3]
+    print(f"Adding the Following Content to the BST: {data_list_edge}")
+    for data in data_list_edge:
+        bst_edge.insert(data)
+    print(f"The BST After Populated Prints as: {bst_edge.inorder()}")
+
+
+
+    # ==========================================
+    # REAL WORLD SCENARIO: BIRD DATABASE
+    # ==========================================
+
+    print("\n=== REAL WORLD SCENARIO: HIGHWAY SIMULATION ===")
+
+    print(f"--Creating Bird Database--")
+    bird_database = BST()
+    print(f"New Bird Database Created: {bird_database.inorder()}")
+
+    print(f"--Populating Bird Database--")
+    bird_list = [ "Crow", "Canary", "Parrot", "Albatross", "Pip", "Ostrich", "Roadrunner"]
+    print(f"Adding the Following Birds to the Bird Database: {bird_list}")
+    for bird in bird_list:
+        bird_database.insert(bird)
+
+    print(f"--Displaying Bird Database--")
+    print(f"The Bird Database contains: {bird_database.inorder()}")
+
+    print(f"--Searching Within Bird Database--")
+    bird1 = "Parrot"
+    print(f"Searching for {bird1} in the Bird Database Returns: {bird_database.search(bird1)}")
+    bird2 = "Seagull"
+    print(f"Searching for {bird2} in the Bird Database Returns: {bird_database.search(bird2)}")
 
 if __name__ == "__main__":
     main()

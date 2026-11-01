@@ -304,7 +304,7 @@ def main():
     """
         Both linear and binary search can be used to search through a sorted set of values, so a book
     which has ascending pages is an example of a data set in which both algorithms can be used. Binary
-    search will in most cases be more efficient, but both can be used.
+    search will in most cases be more efficient, when the data is reasonably sized, but both can be used.
     """
 
     # ===============================================

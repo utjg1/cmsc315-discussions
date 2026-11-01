@@ -335,7 +335,7 @@ def main():
     # REAL WORLD SCENARIO: BIRD DATABASE
     # ==========================================
 
-    print("\n=== REAL WORLD SCENARIO: HIGHWAY SIMULATION ===")
+    print("\n=== REAL WORLD SCENARIO: BIRD DATABASE ===")
 
     print(f"--Creating Bird Database--")
     bird_database = BST()

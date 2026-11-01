@@ -18,8 +18,10 @@ class Node:
         # Store the node's value and initialize references
         # to the left and right child nodes.
 
+        # Value represented by the node
         self.value = value
 
+        # Direct child nodes
         self.left_node = None
         self.right_node = None
 
@@ -29,6 +31,7 @@ class BST:
         # TODO (Student):
         # Initialize an empty Binary Search Tree.
 
+        # Initial root node is None
         self.root_node = None
 
     def insert(self, value):
@@ -43,10 +46,19 @@ class BST:
           current node.
         """
 
+        # Only go recursive if there is a RootNode
         if self.root_node is None:
             self.root_node = Node(value)
         else:
             self._insert_recursive(self.root_node, value)
+
+        """
+            Insertion depends on whether a value is larger or smaller on the current node because
+        BSTs are sorted collections. Whether a value ends up on the left of right side subtree
+        of the current node is dependent on whether the value is less or greater than the current
+        node's value. This sorting system is what allows it to be efficient for finding and storing
+        values.
+        """
 
 
     def _insert_recursive(self, node, value):
@@ -61,17 +73,24 @@ class BST:
         - Return the updated node reference.
         """
 
+        # Do not insert value if value already exists in BST
         if value == node.value:
             return
 
+        # Insert to left side if value is less than current node's value
         if value < node.value:
+            # Set value as value of left node if no left child exists
             if node.left_node is None:
                 node.left_node = Node(value)
+            # Recursive insert to left side subtree
             else:
                 self._insert_recursive(node.left_node, value)
+        # Insert to right side if value is greater than current node's value
         else:
+            # Set value as value of right node if no right child exists
             if node.right_node is None:
                 node.right_node = Node(value)
+            # Recursive insert to right side subtree
             else:
                 self._insert_recursive(node.right_node, value)
 
@@ -87,10 +106,20 @@ class BST:
           more efficient than linear search.
         """
 
+        # Only go recursive if there is a RootNode
+        # Value is not in BST if BST is empty
         if self.root_node is None:
             return False
         else:
             return self._search_recursive(self.root_node, value)
+
+        """
+            BST search is often more efficient than a linear search because the search for a perfect tree
+        has a worst case scenario of O(logN). This is because the height of the list is what determines
+        the worst case, and the height of a list is logN. The worst case of a BST is possible to be O(N),
+        which is the worst case of a linear search, if the tree is highly skewed. This is unlikely if the
+        BST was populated with random values.
+        """
 
     def _search_recursive(self, node, value):
         """
@@ -98,17 +127,23 @@ class BST:
         Implement recursive BST search.
         """
 
+        # Return true if value is found
         if value == node.value:
             return True
 
+        # Search left subtree if value is less than current value
         if value < node.value:
+            # Value does not exist in tree
             if node.left_node is None:
                 return False
+            # Search left subtree
             else:
                 return self._search_recursive(node.left_node, value)
         else:
+            # Value does not exist in tree
             if node.right_node is None:
                 return False
+            # Search right subtree
             else:
                 return self._search_recursive(node.right_node, value)
 
@@ -119,11 +154,14 @@ class BST:
         in-order traversal.
         """
 
+        # Create empty list
         values = []
 
+        # Only go recursive if there is a RootNode
         if self.root_node is not None:
             self._inorder_recursive(self.root_node, values)
 
+        # Return Populated List
         return values
 
     def _inorder_recursive(self, node, values):
@@ -139,13 +177,22 @@ class BST:
           produces sorted output in a BST.
         """
 
+        # Add values in left subtree first
         if node.left_node is not None:
             self._inorder_recursive(node.left_node, values)
 
+        # Add current values
         values.append(node.value)
 
         if node.right_node is not None:
             self._inorder_recursive(node.right_node, values)
+
+        """
+            This traversal produces a sorted output because the BST is constructed with the lowest value
+        being in the leftmost child node and the highest value being in the rightmost child node. By printing
+        the values that exist in the left child node first, then your value, then the right child node, you
+        get ascending order.
+        """
 
 
 def main():
@@ -176,6 +223,14 @@ def main():
     for data in data_list:
         bst.insert(data)
 
+    """
+        A BST is efficient at reducing search space by allowing the search algorithm to
+    sort through possible values without needing to directly check them. By being able to
+    traverse the list, using the current value being greater or less than the searched for
+    value, values that exist in the list are ruled out as being the possible value being
+    checked for. This decrease the amount of processing power needed to find the value.
+    """
+
     # ===============================
     # TODO (Student): IN-ORDER TRAVERSAL
     # ===============================
@@ -191,6 +246,14 @@ def main():
 
     print(f"--Displaying the Tree--")
     print(f"The BST After Populated Prints as: {bst.inorder()}")
+
+    """
+        Traversal produces a sorted output by printing the values that occur
+    leftmost on the tree first before printing out the values that occur rightmost
+    on the tree. This algorithm, along with the left to right ascending order
+    with how the tree is built, creates an ascending list of the values existing in
+    the tree.
+    """
 
     # ===============================
     # TODO (Student): SEARCH TESTS
@@ -215,6 +278,13 @@ def main():
     print(f"Searching for {exist3} in the BST Returns: {bst.search(exist3)}")
     exist4 = 1000
     print(f"Searching for {exist4} in the BST Returns: {bst.search(exist4)}")
+
+    """
+        This section is demonstrating the ability for the search method to locate
+    a value and whether it exists in the BST. It traverses the tree, using the
+    node's values to guide it, and checks whether the value is within the tree.
+    If it is, the method returns True, if not, it returns False.
+    """
 
     # ===============================
     # TODO (Student): EDGE CASES
@@ -241,6 +311,11 @@ def main():
     exist5 = 25
     print(f"Searching for {exist5} in the BST Returns: {bst_edge.search(exist5)}")
 
+    """
+        If a search occurs in an empty tree, the method immediately recognizes it does
+    not have a root node, and returns false due to the tree being empty.
+    """
+
     print(f"--Populating Tree With Duplicates--")
     data_list_edge = [ 1, 1, 2, 3, 3]
     print(f"Adding the Following Content to the BST: {data_list_edge}")
@@ -248,6 +323,11 @@ def main():
         bst_edge.insert(data)
     print(f"The BST After Populated Prints as: {bst_edge.inorder()}")
 
+    """
+        BSTs are collections of unique values, meaning if a value already exists within
+    the BST, it is not stored again. When this case tries to add new values that already
+    exist within the collection, they are rejected, and no addition is made.
+    """
 
 
     # ==========================================

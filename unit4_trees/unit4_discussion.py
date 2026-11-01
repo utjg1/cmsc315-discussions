@@ -115,8 +115,8 @@ class BST:
 
         """
             BST search is often more efficient than a linear search because the search for a perfect tree
-        has a worst case scenario of O(logN). This is because the height of the list is what determines
-        the worst case, and the height of a list is logN. The worst case of a BST is possible to be O(N),
+        has a worst case scenario of O(logN). This is because the height of the tree is what determines
+        the worst case, and the height of a tree is logN. The worst case of a BST is possible to be O(N),
         which is the worst case of a linear search, if the tree is highly skewed. This is unlikely if the
         BST was populated with random values.
         """
@@ -190,8 +190,8 @@ class BST:
         """
             This traversal produces a sorted output because the BST is constructed with the lowest value
         being in the leftmost child node and the highest value being in the rightmost child node. By printing
-        the values that exist in the left child node first, then your value, then the right child node, you
-        get ascending order.
+        the values that exist in the left child node first, then the current node's value, then the right
+        child node, you get ascending order.
         """
 
 
@@ -226,9 +226,10 @@ def main():
     """
         A BST is efficient at reducing search space by allowing the search algorithm to
     sort through possible values without needing to directly check them. By being able to
-    traverse the list, using the current value being greater or less than the searched for
-    value, values that exist in the list are ruled out as being the possible value being
-    checked for. This decrease the amount of processing power needed to find the value.
+    traverse the tree, using the current node's value being greater or less than the searched
+    for value, values that exist in the tree are ruled out as being the possible value being
+    checked for without directly observing the nodes. This decrease the amount of processing
+    power needed to find the value.
     """
 
     # ===============================
@@ -250,8 +251,8 @@ def main():
     """
         Traversal produces a sorted output by printing the values that occur
     leftmost on the tree first before printing out the values that occur rightmost
-    on the tree. This algorithm, along with the left to right ascending order
-    with how the tree is built, creates an ascending list of the values existing in
+    on the tree. This algorithm, along with the left to right ascending order used
+    when the tree is built, creates an ascending list of the values existing in
     the tree.
     """
 
@@ -283,7 +284,7 @@ def main():
         This section is demonstrating the ability for the search method to locate
     a value and whether it exists in the BST. It traverses the tree, using the
     node's values to guide it, and checks whether the value is within the tree.
-    If it is, the method returns True, if not, it returns False.
+    If it is present in the tree, the method returns True. If not, it returns False.
     """
 
     # ===============================

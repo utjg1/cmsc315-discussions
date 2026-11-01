@@ -301,5 +301,44 @@ def main():
     else:
         print(f"Found Page {page_bin} in book!")
 
+    """
+        Both linear and binary search can be used to search through a sorted set of values, so a book
+    which has ascending pages is an example of a data set in which both algorithms can be used. Binary
+    search will in most cases be more efficient, but both can be used.
+    """
+
+    # ===============================================
+    # REAL WORLD SCENARIO: UNSORTED FRUIT CATALOGUE
+    # ===============================================
+
+    print("\n=== REAL WORLD SCENARIO: UNSORTED FRUIT CATALOGUE ===")
+
+    print(f"--Creating Catalogue with Assorted Fruits--")
+    fruit_catalogue = ["Peach", "Starfruit", "Apple", "Grapes", "Kiwi", "Mango"]
+    print(f"Fruit Catalogue Created Containing: {fruit_catalogue}")
+
+    print(f"--Linearly Checking if Catalogue Contains Fruit--")
+    fruit1 = "Orange"
+    print(f"Searching for Fruit '{fruit1}' in catalogue...")
+    if linear_search(fruit_catalogue, fruit1) == -1:
+        print(f"Could not find Fruit '{fruit1}' in catalogue.")
+    else:
+        print(f"Found Fruit '{fruit1}' in catalogue!")
+
+    print(f"--Linearly Checking if Catalogue Contains Fruit--")
+    fruit2 = "Kiwi"
+    print(f"Searching for Fruit '{fruit2}' in catalogue...")
+    if linear_search(fruit_catalogue, fruit2) == -1:
+        print(f"Could not find Fruit '{fruit2}' in catalogue.")
+    else:
+        print(f"Found Fruit '{fruit2}' in catalogue!")
+
+    """
+        While binary search is faster than linear search, it cannot be applied in this scenario. In
+    this scenario, the fruit in the catalogue are unsorted, so a binary search cannot find the fruit.
+    A linear search would need to be used instead as each value needs to be checked for the desired
+    fruit.
+    """
+
 if __name__ == "__main__":
     main()

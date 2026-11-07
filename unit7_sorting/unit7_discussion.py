@@ -328,6 +328,48 @@ def main():
     incurs the most comparisons.
     """
 
+    # ========================================
+    # REAL WORLD SCENARIO: ALPHABETICAL NAMES
+    # ========================================
+
+    print("\n=== REAL WORLD SCENARIO: ALPHABETICAL NAMES ===")
+
+    print(f"--Creating Names List--")
+    names_lst = ["Angela", "Rebecca", "Johnathan", "Gregory", "Samuel", "Alex"]
+    print(f"Names List That Need to be Sorted: {names_lst}")
+
+    print(f"--Sorting Names List--")
+    names_lst = bubble_sort(names_lst)
+    print(f"Names List After Sorting Alphabetically: {names_lst}")
+    print(f"Names Successfully Sorted!")
+
+    # =====================================
+    # REAL WORLD SCENARIO: CONTEST RESULTS
+    # =====================================
+
+    print("\n=== REAL WORLD SCENARIO: CONTEST RESULTS ===")
+
+    print(f"--Conducting Contest--")
+    print(f"Contest Taking Place, Participants Getting Scores...")
+    contest_results = {"Poppy":4, "Sammy":6, "Dmitri":2, "Kyle":3}
+    print(f"Results at the End of the Contest: {contest_results}")
+
+    print(f"--Getting Ascending Scores--")
+    scores = list(contest_results.values())
+    print(f"Scores of Contest: {scores}")
+    scores = merge_sort(scores)
+    print(f"Scores in Ascending Value: {scores}")
+
+    print(f"--Using Scores to Create Descending Results--")
+    contest_results_sorted = {}
+    for score in reversed(scores):
+        for key in contest_results:
+            if contest_results[key] == score:
+                contest_results_sorted.update({key: score})
+                break
+    print(f"Contest Results in Ascending Value: {contest_results_sorted}")
+    print(f"Congrats to {next(iter(contest_results_sorted))} on First Place!")
+
 
 if __name__ == "__main__":
     main()

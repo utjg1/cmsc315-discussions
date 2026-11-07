@@ -423,6 +423,11 @@ def main():
     else:
         print(f"Bubble Sort and Merge Sort took the Same Amount of Time: {time_dif_mer_long}")
 
+    """
+    Very long list added as an edge case to show the major difference in performance between Bubble Sort
+    and Merge Sort. Bubble Sort takes significantly longer with larger sets of data due to its O(N^2)
+    behavior compared to Merge Sort's O(N(logN)).
+    """
 
     # ========================================
     # REAL WORLD SCENARIO: ALPHABETICAL NAMES

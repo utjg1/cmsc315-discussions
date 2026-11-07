@@ -28,7 +28,39 @@ def bubble_sort(lst):
     - Add meaningful comments.
 
     """
-    pass
+
+    # Copy of list as it seems like the directions want a separate list
+    sort_lst = lst.copy()
+
+    # Store length of List so it does not need to be found more than once
+    length = len(sort_lst)
+
+    # Flag for keeping track if a swap has taken place for efficiency
+    swap = False
+
+    # Iterate through each value in the list
+    for i in range(length):
+        # Iterate through each value (besides the last) in the list again
+        for j in range(length - 1):
+
+            # Check if the current and next value are in incorrect ascending order
+            # Swap if they are not
+            if sort_lst[j] > sort_lst[j + 1]:
+                hold = sort_lst[j]
+                sort_lst[j] = sort_lst[j + 1]
+                sort_lst[j + 1] = hold
+
+                # Note that a swap was done
+                swap = True
+
+        # Break out of loop if list is currently sorted
+        if not swap:
+            break
+
+        # Reset swap flag for next iteration
+        swap = False
+
+    return sort_lst
 
 
 def merge_sort(lst):
@@ -45,7 +77,24 @@ def merge_sort(lst):
     - Add meaningful comments.
 
     """
-    pass
+
+    # Store length of list
+    length = len(lst)
+
+    # Return a new list immediately if already sorted
+    if length <= 1:
+        return lst.copy()
+
+    # Get middle index of list
+    mid_index = length // 2
+
+    # Merge sort the lower half of the list
+    low_lst = merge_sort(lst[:mid_index])
+    # Merge sort the upper half of the list
+    high_lst = merge_sort(lst[mid_index:])
+
+    # Merge the lower and upper halves together and return
+    return merge(low_lst, high_lst)
 
 
 def merge(left, right):
@@ -60,8 +109,47 @@ def merge(left, right):
     - Return the merged sorted list.
     - Add meaningful comments.
     """
-    pass
 
+    # Create new empty list for sorted values
+    lst = []
+
+    # Initialize components for merging logic
+    left_index = 0
+    left_length = len(left)
+    right_index = 0
+    right_length = len(right)
+
+    # Flag for knowing if fully merged
+    merged = False
+
+    # While not merged, continue merging
+    while not merged:
+        # Case of left list is already fully merged
+        if left_index >= left_length:
+            lst.append(right[right_index])
+            right_index += 1
+
+        # Case of right list is already fully merged
+        elif right_index >= right_length:
+            lst.append(left[left_index])
+            left_index += 1
+
+        # Case of next left value is less than next right value
+        elif left[left_index] < right[right_index]:
+            lst.append(left[left_index])
+            left_index += 1
+
+        # Case of next right value is less than or equal to next left value
+        else:
+            lst.append(right[right_index])
+            right_index += 1
+
+        # Check if there are still values to merge
+        if (left_index >= left_length) and (right_index >= right_length):
+            merged = True
+
+    # Return new fully merged and sorted list
+    return lst
 
 def main():
     print("=== UNIT 7: SORTING ALGORITHMS ===")
@@ -80,6 +168,35 @@ def main():
     print("\n=== DATASET #1 ===")
     print("TODO: Create an unsorted dataset and test both sorting algorithms.")
 
+    print(f"--Creating New List for Sorting Algorithms--")
+    lst_bubble1 = [40, 33, 102, 7, 8, 90, 22, 61, 68]
+    lst_merge1 = lst_bubble1.copy()
+    print(f"List to be Sorted by Sorting Algorithms: {lst_bubble1}")
+
+    print(f"--Sorting List with Bubble Sort--")
+    print(f"List Before Applying Bubble Sort: {lst_bubble1}")
+    lst_bubble1 = bubble_sort(lst_bubble1)
+    print(f"List After Applying Bubble Sort: {bubble_sort(lst_bubble1)}")
+
+    print(f"--Sorting List with Merge Sort--")
+    print(f"List Before Applying Merge Sort: {lst_merge1}")
+    lst_merge1 = merge_sort(lst_merge1)
+    print(f"List After Applying Merge Sort: {lst_merge1}")
+
+    print(f"--Checking Sorted List Outcome--")
+    print(f"Bubble Sort Outcome: {lst_bubble1}")
+    print(f"Merge Sort Outcome: {lst_merge1}")
+    equivalent = True
+    for i in range(len(lst_bubble1)):
+        if lst_bubble1[i] != lst_merge1[i]:
+            equivalent = False
+            break
+    if equivalent:
+        print(f"Outcome from Bubble Sort and Merge Sort are Equivalent!")
+    else:
+        print(f"Outcome from Bubble Sort and Merge Sort are Different!")
+
+
     # ===============================
     # TODO (Student): DATASET #2
     # ===============================
@@ -92,6 +209,34 @@ def main():
 
     print("\n=== DATASET #2 ===")
     print("TODO: Create a second dataset and compare sorting results.")
+
+    print(f"--Creating New List for Sorting Algorithms--")
+    lst_bubble2 = [-3, 0, 20, 33, 0, -4, 7, 21, 54, 79, 12, 11]
+    lst_merge2 = lst_bubble2.copy()
+    print(f"List to be Sorted by Sorting Algorithms: {lst_bubble2}")
+
+    print(f"--Sorting List with Bubble Sort--")
+    print(f"List Before Applying Bubble Sort: {lst_bubble2}")
+    lst_bubble2 = bubble_sort(lst_bubble2)
+    print(f"List After Applying Bubble Sort: {bubble_sort(lst_bubble2)}")
+
+    print(f"--Sorting List with Merge Sort--")
+    print(f"List Before Applying Merge Sort: {lst_merge2}")
+    lst_merge2 = merge_sort(lst_merge2)
+    print(f"List After Applying Merge Sort: {lst_merge2}")
+
+    print(f"--Checking Sorted List Outcome--")
+    print(f"Bubble Sort Outcome: {lst_bubble2}")
+    print(f"Merge Sort Outcome: {lst_merge2}")
+    equivalent = True
+    for i in range(len(lst_bubble2)):
+        if lst_bubble2[i] != lst_merge2[i]:
+            equivalent = False
+            break
+    if equivalent:
+        print(f"Outcome from Bubble Sort and Merge Sort are Equivalent!")
+    else:
+        print(f"Outcome from Bubble Sort and Merge Sort are Different!")
 
     # ===============================
     # TODO (Student): EDGE CASES
@@ -111,7 +256,77 @@ def main():
     print("\n=== EDGE CASE TESTS ===")
     print("TODO: Demonstrate and explain edge cases.")
 
+    print(f"--Creating Empty List for Sorting Algorithms--")
+    lst_bubble_empty = []
+    lst_merge_empty = lst_bubble_empty.copy()
+    print(f"List to be Sorted by Sorting Algorithms: {lst_bubble_empty}")
 
+    print(f"--Sorting List with Bubble Sort--")
+    print(f"List Before Applying Bubble Sort: {lst_bubble_empty}")
+    lst_bubble_empty = bubble_sort(lst_bubble_empty)
+    print(f"List After Applying Bubble Sort: {bubble_sort(lst_bubble_empty)}")
+
+    print(f"--Sorting List with Merge Sort--")
+    print(f"List Before Applying Merge Sort: {lst_merge_empty}")
+    lst_merge_empty = merge_sort(lst_merge_empty)
+    print(f"List After Applying Merge Sort: {lst_merge_empty}")
+
+    print(f"--Checking Sorted List Outcome--")
+    print(f"Bubble Sort Outcome: {lst_bubble_empty}")
+    print(f"Merge Sort Outcome: {lst_merge_empty}")
+    equivalent = True
+    for i in range(len(lst_bubble_empty)):
+        if lst_bubble_empty[i] != lst_merge_empty[i]:
+            equivalent = False
+            break
+    if equivalent:
+        print(f"Outcome from Bubble Sort and Merge Sort are Equivalent!")
+    else:
+        print(f"Outcome from Bubble Sort and Merge Sort are Different!")
+
+    """
+    For the empty list edge case, Bubble Sort immediately returns the new empty
+    list due to the for loops already being completed and thus not iterated on.
+    For Merge sort, the first check of whether the list is empty or contains one
+    element is triggered and returns a new empty list copy immediately.
+    """
+
+    print(f"\n--Creating Reverse Sorted List for Sorting Algorithms--")
+    lst_bubble_reverse = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5]
+    lst_merge_reverse = lst_bubble_reverse.copy()
+    print(f"List to be Sorted by Sorting Algorithms: {lst_bubble_reverse}")
+
+    print(f"--Sorting List with Bubble Sort--")
+    print(f"List Before Applying Bubble Sort: {lst_bubble_reverse}")
+    lst_bubble_reverse = bubble_sort(lst_bubble_reverse)
+    print(f"List After Applying Bubble Sort: {bubble_sort(lst_bubble_reverse)}")
+
+    print(f"--Sorting List with Merge Sort--")
+    print(f"List Before Applying Merge Sort: {lst_merge_reverse}")
+    lst_merge_reverse = merge_sort(lst_merge_reverse)
+    print(f"List After Applying Merge Sort: {lst_merge_reverse}")
+
+    print(f"--Checking Sorted List Outcome--")
+    print(f"Bubble Sort Outcome: {lst_bubble_reverse}")
+    print(f"Merge Sort Outcome: {lst_merge_reverse}")
+    equivalent = True
+    for i in range(len(lst_bubble_reverse)):
+        if lst_bubble_reverse[i] != lst_merge_reverse[i]:
+            equivalent = False
+            break
+    if equivalent:
+        print(f"Outcome from Bubble Sort and Merge Sort are Equivalent!")
+    else:
+        print(f"Outcome from Bubble Sort and Merge Sort are Different!")
+
+    """
+    For the reverse edge case, Bubble Sort is undergoing its worse case
+    while Merge Sort is not. Bubble Sort is undergoing a swap as many times
+    as it can for a given set of data when handed a reverse sorted set of
+    data. Merge Sort needs a different data set for it to undergo the most
+    operations, one that looks more like {0, 4, 2, 6, 1, 5, 3, 7}, as this
+    incurs the most comparisons.
+    """
 
 
 if __name__ == "__main__":

@@ -13,6 +13,7 @@ Your goal is to demonstrate both your coding ability and your
 understanding of algorithm efficiency and behavior.
 """
 
+import time
 
 def bubble_sort(lst):
     """
@@ -175,13 +176,21 @@ def main():
 
     print(f"--Sorting List with Bubble Sort--")
     print(f"List Before Applying Bubble Sort: {lst_bubble1}")
+    start_time_bub1 = time.perf_counter()
     lst_bubble1 = bubble_sort(lst_bubble1)
-    print(f"List After Applying Bubble Sort: {bubble_sort(lst_bubble1)}")
+    end_time_bub1 = time.perf_counter()
+    time_dif_bub1 = end_time_bub1 - start_time_bub1
+    print(f"List After Applying Bubble Sort: {lst_bubble1}")
+    print(f"Bubble Performance: {time_dif_bub1: .8f} seconds")
 
     print(f"--Sorting List with Merge Sort--")
     print(f"List Before Applying Merge Sort: {lst_merge1}")
+    start_time_mer1 = time.perf_counter()
     lst_merge1 = merge_sort(lst_merge1)
+    end_time_mer1 = time.perf_counter()
+    time_dif_mer1 = end_time_mer1 - start_time_mer1
     print(f"List After Applying Merge Sort: {lst_merge1}")
+    print(f"Merge Performance: {time_dif_mer1: .8f} seconds")
 
     print(f"--Checking Sorted List Outcome--")
     print(f"Bubble Sort Outcome: {lst_bubble1}")
@@ -195,6 +204,13 @@ def main():
         print(f"Outcome from Bubble Sort and Merge Sort are Equivalent!")
     else:
         print(f"Outcome from Bubble Sort and Merge Sort are Different!")
+    if time_dif_mer1 > time_dif_bub1:
+        print(f"Merge Sort took{((time_dif_mer1 - time_dif_bub1) / time_dif_bub1): .2%} longer!")
+    elif time_dif_mer1 < time_dif_bub1:
+        print(f"Bubble Sort took{((time_dif_bub1 - time_dif_mer1) / time_dif_mer1): .2%} longer!")
+    else:
+        print(f"Bubble Sort and Merge Sort took the Same Amount of Time: {time_dif_mer1}")
+
 
 
     # ===============================
@@ -217,13 +233,21 @@ def main():
 
     print(f"--Sorting List with Bubble Sort--")
     print(f"List Before Applying Bubble Sort: {lst_bubble2}")
+    start_time_bub2 = time.perf_counter()
     lst_bubble2 = bubble_sort(lst_bubble2)
-    print(f"List After Applying Bubble Sort: {bubble_sort(lst_bubble2)}")
+    end_time_bub2 = time.perf_counter()
+    time_dif_bub2 = end_time_bub2 - start_time_bub2
+    print(f"List After Applying Bubble Sort: {lst_bubble2}")
+    print(f"Bubble Performance: {time_dif_bub2: .8f} seconds")
 
     print(f"--Sorting List with Merge Sort--")
     print(f"List Before Applying Merge Sort: {lst_merge2}")
+    start_time_mer2 = time.perf_counter()
     lst_merge2 = merge_sort(lst_merge2)
+    end_time_mer2 = time.perf_counter()
+    time_dif_mer2 = end_time_mer2 - start_time_mer2
     print(f"List After Applying Merge Sort: {lst_merge2}")
+    print(f"Merge Performance: {time_dif_mer2: .8f} seconds")
 
     print(f"--Checking Sorted List Outcome--")
     print(f"Bubble Sort Outcome: {lst_bubble2}")
@@ -237,6 +261,12 @@ def main():
         print(f"Outcome from Bubble Sort and Merge Sort are Equivalent!")
     else:
         print(f"Outcome from Bubble Sort and Merge Sort are Different!")
+    if time_dif_mer2 > time_dif_bub2:
+        print(f"Merge Sort took{((time_dif_mer2 - time_dif_bub2) / time_dif_bub2): .2%} longer!")
+    elif time_dif_mer2 < time_dif_bub2:
+        print(f"Bubble Sort took{((time_dif_bub2 - time_dif_mer2) / time_dif_mer2): .2%} longer!")
+    else:
+        print(f"Bubble Sort and Merge Sort took the Same Amount of Time: {time_dif_mer2}")
 
     # ===============================
     # TODO (Student): EDGE CASES
@@ -263,13 +293,21 @@ def main():
 
     print(f"--Sorting List with Bubble Sort--")
     print(f"List Before Applying Bubble Sort: {lst_bubble_empty}")
+    start_time_bub_empty = time.perf_counter()
     lst_bubble_empty = bubble_sort(lst_bubble_empty)
-    print(f"List After Applying Bubble Sort: {bubble_sort(lst_bubble_empty)}")
+    end_time_bub_empty = time.perf_counter()
+    time_dif_bub_empty = end_time_bub_empty - start_time_bub_empty
+    print(f"List After Applying Bubble Sort: {lst_bubble_empty}")
+    print(f"Bubble Performance: {time_dif_bub_empty: .8f} seconds")
 
     print(f"--Sorting List with Merge Sort--")
     print(f"List Before Applying Merge Sort: {lst_merge_empty}")
+    start_time_mer_empty = time.perf_counter()
     lst_merge_empty = merge_sort(lst_merge_empty)
+    end_time_mer_empty = time.perf_counter()
+    time_dif_mer_empty = end_time_mer_empty - start_time_mer_empty
     print(f"List After Applying Merge Sort: {lst_merge_empty}")
+    print(f"Merge Performance: {time_dif_mer_empty: .8f} seconds")
 
     print(f"--Checking Sorted List Outcome--")
     print(f"Bubble Sort Outcome: {lst_bubble_empty}")
@@ -283,6 +321,12 @@ def main():
         print(f"Outcome from Bubble Sort and Merge Sort are Equivalent!")
     else:
         print(f"Outcome from Bubble Sort and Merge Sort are Different!")
+    if time_dif_mer_empty > time_dif_bub_empty:
+        print(f"Merge Sort took{((time_dif_mer_empty - time_dif_bub_empty) / time_dif_bub_empty): .2%} longer!")
+    elif time_dif_mer_empty < time_dif_bub_empty:
+        print(f"Bubble Sort took{((time_dif_bub_empty - time_dif_mer_empty) / time_dif_mer_empty): .2%} longer!")
+    else:
+        print(f"Bubble Sort and Merge Sort took the Same Amount of Time: {time_dif_mer_empty}")
 
     """
     For the empty list edge case, Bubble Sort immediately returns the new empty
@@ -298,13 +342,21 @@ def main():
 
     print(f"--Sorting List with Bubble Sort--")
     print(f"List Before Applying Bubble Sort: {lst_bubble_reverse}")
+    start_time_bub_reverse = time.perf_counter()
     lst_bubble_reverse = bubble_sort(lst_bubble_reverse)
-    print(f"List After Applying Bubble Sort: {bubble_sort(lst_bubble_reverse)}")
+    end_time_bub_reverse = time.perf_counter()
+    time_dif_bub_reverse = end_time_bub_reverse - start_time_bub_reverse
+    print(f"List After Applying Bubble Sort: {lst_bubble_reverse}")
+    print(f"Bubble Performance: {time_dif_bub_reverse: .8f} seconds")
 
     print(f"--Sorting List with Merge Sort--")
     print(f"List Before Applying Merge Sort: {lst_merge_reverse}")
+    start_time_mer_reverse = time.perf_counter()
     lst_merge_reverse = merge_sort(lst_merge_reverse)
+    end_time_mer_reverse = time.perf_counter()
+    time_dif_mer_reverse = end_time_mer_reverse - start_time_mer_reverse
     print(f"List After Applying Merge Sort: {lst_merge_reverse}")
+    print(f"Merge Performance: {time_dif_mer_reverse: .8f} seconds")
 
     print(f"--Checking Sorted List Outcome--")
     print(f"Bubble Sort Outcome: {lst_bubble_reverse}")
@@ -318,6 +370,12 @@ def main():
         print(f"Outcome from Bubble Sort and Merge Sort are Equivalent!")
     else:
         print(f"Outcome from Bubble Sort and Merge Sort are Different!")
+    if time_dif_mer_reverse > time_dif_bub_reverse:
+        print(f"Merge Sort took{((time_dif_mer_reverse - time_dif_bub_reverse) / time_dif_bub_reverse): .2%} longer!")
+    elif time_dif_mer_reverse < time_dif_bub_reverse:
+        print(f"Bubble Sort took{((time_dif_bub_reverse - time_dif_mer_reverse) / time_dif_mer_reverse): .2%} longer!")
+    else:
+        print(f"Bubble Sort and Merge Sort took the Same Amount of Time: {time_dif_mer_reverse}")
 
     """
     For the reverse edge case, Bubble Sort is undergoing its worse case
@@ -327,6 +385,44 @@ def main():
     operations, one that looks more like {0, 4, 2, 6, 1, 5, 3, 7}, as this
     incurs the most comparisons.
     """
+
+    print(f"\n--Creating Very Long List--")
+    lst_bubble_long = list(range(10000, 0, -1))
+    lst_merge_long = lst_bubble_long.copy()
+    print(f"List to be Sorted by Sorting Algorithms: [{lst_bubble_long[0]},... ,{lst_bubble_long[len(lst_bubble_long) - 1]}]")
+
+    print(f"--Sorting List with Bubble Sort--")
+    start_time_bub_long = time.perf_counter()
+    lst_bubble_long = bubble_sort(lst_bubble_long)
+    end_time_bub_long = time.perf_counter()
+    time_dif_bub_long = end_time_bub_long - start_time_bub_long
+    print(f"Bubble Performance: {time_dif_bub_long: .8f} seconds")
+
+    print(f"--Sorting List with Merge Sort--")
+    start_time_mer_long = time.perf_counter()
+    lst_merge_long = merge_sort(lst_merge_long)
+    end_time_mer_long = time.perf_counter()
+    time_dif_mer_long = end_time_mer_long - start_time_mer_long
+    print(f"Merge Performance: {time_dif_mer_long: .8f} seconds")
+
+    print(f"--Checking Sorted List Outcome--")
+    # Not displaying lists here due to size, just if they are equivalent
+    equivalent = True
+    for i in range(len(lst_bubble_long)):
+        if lst_bubble_long[i] != lst_merge_long[i]:
+            equivalent = False
+            break
+    if equivalent:
+        print(f"Outcome from Bubble Sort and Merge Sort are Equivalent!")
+    else:
+        print(f"Outcome from Bubble Sort and Merge Sort are Different!")
+    if time_dif_mer_long > time_dif_bub_long:
+        print(f"Merge Sort took{((time_dif_mer_long - time_dif_bub_long) / time_dif_bub_long): .2%} longer!")
+    elif time_dif_mer_long < time_dif_bub_long:
+        print(f"Bubble Sort took{((time_dif_bub_long - time_dif_mer_long) / time_dif_mer_long): .2%} longer!")
+    else:
+        print(f"Bubble Sort and Merge Sort took the Same Amount of Time: {time_dif_mer_long}")
+
 
     # ========================================
     # REAL WORLD SCENARIO: ALPHABETICAL NAMES

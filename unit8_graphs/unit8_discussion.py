@@ -33,7 +33,12 @@ def bfs(graph, start):
     - How BFS differs from depth-first traversal.
     """
 
+    # Edge case for empty graph
     if not graph:
+        return []
+
+    # Edge case for start not in graph
+    if not (start in graph):
         return []
 
     # Initialize visited with first value
